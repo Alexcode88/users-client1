@@ -1,0 +1,52 @@
+<h2>
+    User List
+</h2>
+<button (click) = "getUsers()">
+    Click to load users
+</button>
+<div *ngFor = "let user of allUsers" class="userCard">
+    <div class="firstName">
+        First name: {{user.firstName}}
+    </div>
+    <div class="lastName">
+        Last name: {{user.lastName}}
+    </div>
+    <div class="userName">
+        User name: {{user.userName}}
+    </div>
+</div>
+<form (submit) = "postUser( $event )">
+    <div>
+        <label for="firstName">
+            First Name:
+        </label>
+        <input type="text" id="firstName" (keyup) = "updateFirstName($event)" [value] = "firstName">
+    </div>
+    <div>
+        <label for="lastName">
+            Last Name:
+        </label>
+        <input type="text" id="lastName" (keyup) = "updateLastName($event)">
+    </div>
+    <div>
+        <label for="userName">
+            User Name:
+        </label>
+        <input type="text" id="userName" (keyup) = "updateUserName($event)">
+    </div>
+    <div>
+        <label for="password">
+            Password:
+        </label>
+        <input type="password" id="password" (keyup) = "updatePassword($event)">
+    </div>
+    <button type="submit">
+        Add user
+    </button>
+</form>
+<h2>
+    New user
+</h2>
+<div>
+    {{firstName}} {{lastName}} {{userName}} {{password}}
+</div>

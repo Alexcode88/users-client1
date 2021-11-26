@@ -1,0 +1,32 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UsersService {
+  users: any[] = [];
+
+  constructor( private _http: HttpClient ) { 
+    this.fetchUsers();
+  }
+
+  fetchUsers(): void{
+    this._http.get( "http://localhost:8181/api/users/" )
+      .subscribe( (data:any) => {
+        this.users = data;
+        console.log( this.users );
+      });
+  }
+
+  createUser( newUser: any ): void {
+    this._http.post( "http://localhost:8181/api/users/", newUser )
+      .subscribe( (data: any) => {
+        this.fetchUsers();
+      });
+  }
+
+  createAndReturnUser( newUser: any ) {
+    return  this._http.post( "http://localhost:8181/api/users/", newUser );
+  }
+}
