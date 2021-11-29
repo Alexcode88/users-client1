@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UsersService } from './users.service';
 
 @Component({
@@ -8,14 +8,15 @@ import { UsersService } from './users.service';
 })
 export class UserlistComponent implements OnInit {
   allUsers: any[] = [];
-  firstName: any = "Test";
-  lastName: any = "";
-  password: any = "";
-  userName: any = "";
+
+  @Input() greeting: string = "";
+  @Input() test: any;
 
   constructor( private _usersService: UsersService ) { }
 
   ngOnInit(): void {
+    console.log( "We are inside the userlist component!" );
+    this.test();
   }
 
   getUsers(): void {
@@ -24,39 +25,13 @@ export class UserlistComponent implements OnInit {
     console.log( "Userlist component", this.allUsers );
   }
 
-  updateFirstName( event: any ): void {
-    this.firstName = event.target.value;
-  }
-
-  updateLastName( event: any ): void {
-    this.lastName = event.target.value;
-  }
-
-  updateUserName( event: any ): void {
-    this.userName = event.target.value;
-  }
-
-  updatePassword( event: any ): void {
-    this.password = event.target.value;
-  }
-
-  postUser( event: any ): void {
-    event.preventDefault();
-    
-
-    let newUser = {
-      userName : this.userName,
-      firstName : this.firstName,
-      lastName : this.lastName,
-      password : this.password
-    };
-
+  postUser( newUser: any ): void {
     //this._usersService.createUser( newUser );
-    let observable = this._usersService.createAndReturnUser( newUser )
-
+    let observable = this._usersService.createAndReturnUser( newUser );
+    
     observable.subscribe( (data: any) => {
       this.allUsers.push( data );
-    })
-    console.log( this.firstName, this.lastName, this.password, this.userName );
+    }); 
+    
   }
 }
