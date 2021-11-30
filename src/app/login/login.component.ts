@@ -27,9 +27,8 @@ export class LoginComponent implements OnInit {
       loginUserName : this.loginUserName
     }
     let observable = this._usersService.loginUser( currentUser );
-
     observable.subscribe( (data: any ) => {
-      this._router.navigate( ['/home'] )
+      this._router.navigate( ['/home'] );
     },
     ( error: any ) => {
       console.log( error );

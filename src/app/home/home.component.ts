@@ -15,18 +15,29 @@ export class HomeComponent implements OnInit {
                 private _route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    /*let observable = this._usersService.validateUser();
+    let observable = this._usersService.validateUser();
     observable.subscribe( (data: any) => {
       console.log( data );
     },
     (error: any) =>{
+      console.log( error.statusText );
       this._router.navigate( ['/login'] );
-    })*/
+    })
     this.getUsers();
   }
 
   getUsers(): void {
     this.allUsers = this._usersService.users;
+  }
+
+  logout(): void {
+    let observable = this._usersService.logoutUser();
+
+    observable.subscribe( (data: any) => {
+      console.log( data );
+      this._router.navigate( ['/login'] );
+    });
+
   }
 
 }

@@ -20,22 +20,26 @@ export class UsersService {
   }
 
   createUser( newUser: any ): void {
-    this._http.post( "http://localhost:8181/api/users/", newUser )
+    this._http.post( "/api/users/", newUser )
       .subscribe( (data: any) => {
         this.fetchUsers();
       });
   }
 
   createAndReturnUser( newUser: any ) {
-    return  this._http.post( "http://localhost:8181/api/users/", newUser );
+    return  this._http.post( "/api/users/", newUser );
   }
 
   loginUser( currentUser: any ){
     console.log( currentUser );
-    return  this._http.post( "http://localhost:8181/api/users/login", currentUser );
+    return  this._http.post( "/api/users/login", currentUser );
   }
 
   validateUser(): any {
-    return this._http.get( "http://localhost:8181/api/users/validate" );
+    return this._http.get( "/api/users/validate" );
+  }
+
+  logoutUser(): any {
+    return this._http.get( '/api/users/logout' );
   }
 }
