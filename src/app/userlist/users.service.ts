@@ -29,4 +29,13 @@ export class UsersService {
   createAndReturnUser( newUser: any ) {
     return  this._http.post( "http://localhost:8181/api/users/", newUser );
   }
+
+  loginUser( currentUser: any ){
+    console.log( currentUser );
+    return  this._http.post( "http://localhost:8181/api/users/login", currentUser );
+  }
+
+  validateUser(): any {
+    return this._http.get( "http://localhost:8181/api/users/validate" );
+  }
 }
